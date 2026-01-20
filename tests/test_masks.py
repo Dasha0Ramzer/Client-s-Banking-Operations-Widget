@@ -22,7 +22,9 @@ def test_get_mask_card_number(card_number: Any, expected: Any) -> None:
     assert get_mask_card_number(card_number) == expected
     with pytest.raises(TypeError):
         get_mask_card_number(0)
+    with pytest.raises(TypeError):
         get_mask_card_number(123)
+    with pytest.raises(TypeError):
         get_mask_card_number(1234567890123456)
 
 
@@ -43,5 +45,7 @@ def test_get_mask_account(account_number: Any, expected: str) -> None:
     assert get_mask_account(account_number) == expected
     with pytest.raises(TypeError):
         get_mask_account(0)
+    with pytest.raises(TypeError):
         get_mask_account(123)
+    with pytest.raises(TypeError):
         get_mask_account(12345678901234567890)

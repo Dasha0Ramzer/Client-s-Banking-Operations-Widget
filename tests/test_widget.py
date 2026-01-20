@@ -23,7 +23,9 @@ def test_mask_account_card(account_information: Any, expected: Any) -> None:
     assert mask_account_card(account_information) == expected
     with pytest.raises(TypeError):
         mask_account_card(0)
+    with pytest.raises(TypeError):
         mask_account_card(123)
+    with pytest.raises(TypeError):
         mask_account_card(1234567890123456)
 
 
@@ -45,5 +47,7 @@ def test_get_date(date_another_format: Any, expected: Any) -> None:
     assert get_date(date_another_format) == expected
     with pytest.raises(TypeError):
         get_date(0)
+    with pytest.raises(TypeError):
         get_date(123)
+    with pytest.raises(TypeError):
         get_date(12345678901234567890)
