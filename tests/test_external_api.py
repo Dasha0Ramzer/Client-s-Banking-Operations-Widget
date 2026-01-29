@@ -14,7 +14,7 @@ def test_currency_converter() -> None:
         mock_get.return_value.status_code = 200
         mock_get.return_value.json.return_value = {"result": 618658.363805}
         transaction = {"operationAmount": {"currency": {"code": "USD"}, "amount": 8221.37}}
-        assert currency_converter(transaction) == "Сумма = 618658.36 руб."
+        assert currency_converter(transaction) == 618658.363805
         mock_get.assert_called_once_with(
             "https://api.apilayer.com/exchangerates_data/convert",
             headers={"apikey": f"{api_key}"},
@@ -23,8 +23,8 @@ def test_currency_converter() -> None:
 
 
 def test_currency_converter_2() -> None:
-    transaction = {"operationAmount": {"currency": {"code": "RUB"}, "amount": 100}}
-    assert currency_converter(transaction) == "Сумма = 100 руб."
+    transaction = {"operationAmount": {"currency": {"code": "RUB"}, "amount": 100.1}}
+    assert currency_converter(transaction) == 100.1
 
 
 def test_currency_converter_3() -> None:
