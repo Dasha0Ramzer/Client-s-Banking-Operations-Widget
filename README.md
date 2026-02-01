@@ -17,7 +17,7 @@
 2. Клонируйте репозиторий с [GitHub](https://github.com/Dasha0Ramzer/Client-s-Banking-Operations-Widget.git).
 3. Установите зависимости:
 ```
-# в разработке
+poetry install
 ```
 4. Получите API-ключ на [сайте](https://apilayer.com/marketplace/exchangerates_data-api) 
 ## Разработка

@@ -5,10 +5,12 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     encoding="utf-8",
-    filename="../logs/masks.log",
+    filename="./logs/masks.log",
     filemode="w",
 )
 masks_logger = logging.getLogger("masks")
+file_handler = logging.FileHandler("./logs/masks.log")
+masks_logger.addHandler(file_handler)
 
 
 def get_mask_card_number(card_number: Any) -> str:

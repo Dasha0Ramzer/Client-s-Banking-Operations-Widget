@@ -7,10 +7,12 @@ logging.basicConfig(
     level=logging.DEBUG,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     encoding="utf-8",
-    filename="../logs/utils.log",
+    filename="./logs/utils.log",
     filemode="w",
 )
 utils_logger = logging.getLogger("utils")
+file_handler = logging.FileHandler("./logs/utils.log")
+utils_logger.addHandler(file_handler)
 
 
 def financial_transaction_data(path_to_the_JSON_file: str) -> Any:
