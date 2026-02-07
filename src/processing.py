@@ -1,4 +1,8 @@
+import re
+from collections import defaultdict, Counter
 from typing import Union
+
+from src.utils import financial_transaction_data
 
 
 def filter_by_state(list_of_dictionaries: list[dict], state: str = "EXECUTED") -> Union[list[dict], str]:
@@ -29,3 +33,28 @@ def sort_by_date(list_of_dictionaries: list[dict], reversed: bool = True) -> Uni
             return "Некорректные данные"
     new_list = sorted(list_of_dictionaries, key=lambda dictionary: dictionary["date"], reverse=reversed)
     return new_list
+
+
+def process_bank_search(data: list[dict], search: str) -> list[dict]:
+    '''Функция поиска по описанию банковской операции'''
+    new_list = []
+    for operation in data:
+        descriptions = re.search(search, operation.get("description", ""), flags=re.IGNORECASE)
+        if descriptions:
+            new_list.append(operation)
+    return new_list
+
+
+def process_bank_operations(data: list[dict], categories: list) -> dict:
+    '''Функция, определяющая количество операций в каждой категории'''
+    category_counter = Counter()
+    for operation in data:
+        category = operation.get('description')
+        if category in categories:
+            category_counter[category] += 1
+    return dict(category_counter)
+
+
+
+# print(process_bank_search(financial_transaction_data('../data/operations.json'), 'я'))
+# print(process_bank_operations(financial_transaction_data('../data/operations.json'), ['Перевод организации']))
