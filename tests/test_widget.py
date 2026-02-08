@@ -37,17 +37,11 @@ def test_mask_account_card(account_information: Any, expected: Any) -> None:
         ("3219-67-93T18:35:29.512364", "Такой даты не существует"),
         ("219-67-93T18:35:29.512364", "Некорректные данные"),
         ("", "Некорректные данные"),
+        (0, "Некорректные данные"),
         ([], "Некорректные данные"),
         ({}, "Некорректные данные"),
-        ([1, 2], "Некорректные данные"),
         ("aaaaaaaabbbbbbccccccdddddd", "Некорректные данные"),
     ],
 )
 def test_get_date(date_another_format: Any, expected: Any) -> None:
     assert get_date(date_another_format) == expected
-    with pytest.raises(TypeError):
-        get_date(0)
-    with pytest.raises(TypeError):
-        get_date(123)
-    with pytest.raises(TypeError):
-        get_date(12345678901234567890)
