@@ -2,12 +2,19 @@ from typing import Any, Iterator
 
 
 def filter_by_currency(transactions: Any, currency: Any) -> Any:
-    """Функция, выдающая транзации, где валюта операции соответствует заданной"""
+    """Функция, выдающая транзакции, где валюта операции соответствует заданной"""
     if not isinstance(transactions, list):
         raise TypeError("transactions must be a list")
     if len(transactions) == 0:
         return "Список транзакций пуст"
-    result = (dict_ for dict_ in transactions if dict_["operationAmount"]["currency"]["code"] == currency)
+    result = (
+        dict_
+        for dict_ in transactions
+        if "operationAmount" in dict_
+        and dict_["operationAmount"]["currency"]["code"] == currency
+        or "currency_code" in dict_
+        and dict_["currency_code"] == currency
+    )
     return result
 
 

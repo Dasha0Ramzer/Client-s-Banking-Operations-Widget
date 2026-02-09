@@ -24,9 +24,8 @@ def mask_account_card(account_information: Any) -> Any:
 
 def get_date(date_another_format: Any) -> str:
     """Функция, возвращающая корректный формат даты"""
-    if len(date_another_format) != 26:
+    if not isinstance(date_another_format, str):
         return "Некорректные данные"
-    day, month, year = "", "", ""
     year = date_another_format[:4]
     month = date_another_format[5:7]
     day = date_another_format[8:10]
